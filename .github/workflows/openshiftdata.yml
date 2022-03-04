@@ -18,3 +18,9 @@ jobs:
       - run: oc get pods
       - name: Get  image streams
         run: oc get is
+      - name: Get svc
+        run: oc get svc
+      - name: Get routes
+        run: oc get routes
+      - name: Auto scale replica’s
+        run: oc autoscale deploymentconfig/NAME_OF_YOUR_APPLICATION --min=2 --max=4
