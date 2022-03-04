@@ -16,3 +16,5 @@ jobs:
           openshift_token: ${{ env.OPENSHIFT_TOKEN }}
           insecure_skip_tls_verify: true
       - run: oc get pods
+      - name: Get  image streams
+        run: oc get is
