@@ -3,14 +3,14 @@
 name: Quarkus Codestart CI
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
+    env:
+      OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+      OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -19,3 +19,14 @@ jobs:
           java-version: 11
       - name: Build
         run: ./mvnw verify -B
+        
+      - name: Log in to OpenShift
+        uses: redhat-actions/oc-login@v1
+        with:
+            openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
+            openshift_token: ${{ env.OPENSHIFT_TOKEN }}
+            insecure_skip_tls_verify: true
+      - name: Run tests
+        run: ./mvnw test
+      - name: Run package
+        run: ./mvnw clean package -Dquarkus.kubernetes.deploy=true -Dmaven.test.skip=true
