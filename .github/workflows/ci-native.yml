@@ -17,9 +17,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Build
+      - name: Package
         run: ./mvnw package -Pnative 
-             ./mvnw verify -B
+      - name: Build
+        run: ./mvnw verify -B
         
       - name: Log in to OpenShift
         uses: redhat-actions/oc-login@v1
