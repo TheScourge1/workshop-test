@@ -22,5 +22,5 @@ jobs:
         run: oc get svc
       - name: Get routes
         run: oc get routes
-      - name: Auto scale replica’s
-        run: oc autoscale deploymentconfig/workshop-test --min=2 --max=4
+      - name: Get pod memory
+        run: oc adm top pods
