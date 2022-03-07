@@ -17,8 +17,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Package
-        run: ./mvnw package -Pnative 
       - name: Build
         run: ./mvnw verify -B
         
