@@ -29,4 +29,4 @@ jobs:
       - name: Run tests
         run: ./mvnw test
       - name: Run package
-        run: ./mvnw clean package -Pnative -Dquarkus.kubernetes.deploy=true -Dquarkus.openshift.build-strategy=native -Dmaven.test.skip=true 
+        run: ./mvnw clean package -Pnative -Dquarkus.kubernetes.deploy=true -Dquarkus.openshift.build-strategy=docker -Dmaven.test.skip=true 
